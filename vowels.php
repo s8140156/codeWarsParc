@@ -29,30 +29,30 @@ function getCount($str) {
     return $vowelsCount;
   }
 
-  function getCount($str) {
-    $vowelsCount = 0;
-    $vowels = ['a', 'e', 'i', 'o', 'u'];
-    // enter your magic here
-    foreach($vowels as $vowel) {
-      $vowelsCount += substr_count($str, $vowel);
-    }
+  // function getCount($str) {
+  //   $vowelsCount = 0;
+  //   $vowels = ['a', 'e', 'i', 'o', 'u'];
+  //   // enter your magic here
+  //   foreach($vowels as $vowel) {
+  //     $vowelsCount += substr_count($str, $vowel);
+  //   }
     
     
-    return $vowelsCount;
-  }
+  //   return $vowelsCount;
+  // }
 
-  function getCount($str) {
-    $vowelsCount = 0;
-    $vowelArr = ['a','e','i','o','u'];
-    $strSplit = str_split($str,1);
+  // function getCount($str) {
+  //   $vowelsCount = 0;
+  //   $vowelArr = ['a','e','i','o','u'];
+  //   $strSplit = str_split($str,1);
     
-    for( $i=0; $i < count($strSplit); $i++){
-      if( in_array($strSplit[$i], $vowelArr)) 
-        $vowelsCount++;
-    }
+  //   for( $i=0; $i < count($strSplit); $i++){
+  //     if( in_array($strSplit[$i], $vowelArr)) 
+  //       $vowelsCount++;
+  //   }
     
-    return $vowelsCount;
-  }
+  //   return $vowelsCount;
+  // }
 
   
 
