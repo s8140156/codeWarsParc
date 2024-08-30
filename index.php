@@ -1,22 +1,21 @@
 <?php
 
-// #39 Area or Perimeter
+function isIsogram($string) {
 
-// You are given the length and width of a 4-sided polygon. The polygon can either be a rectangle or a square.
-// If it is a square, return its area(面積). If it is a rectangle, return its perimeter(周長).
-
-function areaOrPerimeter (int $l, int $w){
-    //Your solution
-    if($l==$w){
-        return $l*$w;
+    $string=strtolower($string);
+    $chArray=str_split($string);
+    $norepeat=array_unique($chArray);
+    if(count($chArray)==count($norepeat)){
+        return true;
     }else{
-        return 2*($l+$w);
+        return false;
     }
-   }
+}
 
-echo areaOrPerimeter (3,4);
+echo isIsogram('aba')?'true':'false';
 
-
-
+// array_unique() 移除陣列中的重複值，並返回一個只包含唯一值的新陣列
+// 然後計算原先的陣列($chArray)與移除後($norepeat)的比較字數是否一樣
+// 一樣代表沒有重複過 所以兩邊字數一樣=>true
 
 ?>
