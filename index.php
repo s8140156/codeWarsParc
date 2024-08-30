@@ -1,21 +1,25 @@
 <?php
 
-function isIsogram($string) {
+// #41 Sort array by string length
+// Write a function that takes an array of strings as an argument and returns a sorted array containing the same strings, ordered from shortest to longest.
+// ["Telescopes", "Glasses", "Eyes", "Monocles"]=>["Eyes", "Glasses", "Monocles", "Telescopes"]
 
-    $string=strtolower($string);
-    $chArray=str_split($string);
-    $norepeat=array_unique($chArray);
-    if(count($chArray)==count($norepeat)){
-        return true;
-    }else{
-        return false;
-    }
+function sortByLength($toSort)
+{
+    usort($toSort, function ($a, $b) {
+        return strlen($a) - strlen($b);
+    });
+
+    return $toSort;
 }
 
-echo isIsogram('aba')?'true':'false';
+print_r(sortByLength(['kill','do','loved','banana']));
 
-// array_unique() 移除陣列中的重複值，並返回一個只包含唯一值的新陣列
-// 然後計算原先的陣列($chArray)與移除後($norepeat)的比較字數是否一樣
-// 一樣代表沒有重複過 所以兩邊字數一樣=>true
+// usort($toSort, function($a, $b) {...})：直接對這個陣列進行排序，按照字串的長度從短到長排列 直接存回$toSort
+// strlen($a) - strlen($b)：將 $a 的長度減去 $b 的長度 運算的結果決定了 $a 和 $b 在排序過程中的相對順序
+// 負數 (strlen($a) < strlen($b)): $a 比 $b 短，因此 $a 應該排在 $b 之前。
+// 正數 (strlen($a) > strlen($b)): $a 比 $b 長，因此 $a 應該排在 $b 之後。
+// 零 (strlen($a) == strlen($b)): $a 和 $b 長度相同，順序不變
+
 
 ?>
