@@ -30,6 +30,17 @@ function find_uniq($a)
     return null;
 }
 
+// 更簡潔寫法
+// function find_uniq($a) {
+//     sort($a);  // 將數組進行升序排序
+    
+//     // 檢查排序後的數組前兩個元素是否相同
+//     return ($a[0] === $a[1]) ? end($a) : current($a);
+//   }
+
+// 如果它們相同，說明數組中前幾個元素都是相同的，唯一的元素一定在數組的最後位置
+// 如果它們不同，說明第一個元素本身就是唯一的元素
+
 
 //以下方式卡在使用array_count_values()只能處理字串和整數類型的數值
 // function find_uniq($a)
