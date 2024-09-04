@@ -1,28 +1,30 @@
 <?php
 
-// #44 Find the odd int
+// #45 Convert a Number to a String!
+// We need a function that can transform a number (integer) into a string.
 
-// Given an array of integers, find the one that appears an odd number of times.
-// There will always be only one integer that appears an odd number of times.
-
-// Examples
-// [1,1,2] should return 2, because it occurs 1 time (which is odd).
-// [0] should return 0, because it occurs 1 time (which is odd).
-
-function findIt(array $seq): int
+function numberToString($num)
 {
-    // Enter your code here
-    $counts = array_count_values($seq);
-    foreach ($counts as $key => $num) {
-        if ($num % 2 == 1) {
-            return $key;
-        }
-    }
+  return (string)$num;
 }
 
-$seq=[10];
-echo findIt($seq);
+// function numberToString($num)
+// {
+//   return strval($num);
+// }
 
+$num=18;
+
+echo gettype(numberToString($num));
+echo "<br>";
+
+var_dump($num);
+echo "<br>";
+//在這邊echo的都不會是使用function後的資料型態喔~
+//就只是echo那個變數$num
+
+echo gettype($num);
+echo "<br>";
 
 
 ?>
