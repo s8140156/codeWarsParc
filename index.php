@@ -1,18 +1,19 @@
 <?php
 
-// #50 get character from ASCII Value
-// Write a function which takes a number and returns the corresponding ASCII char for that value.
+// #51 Convert a string to an array
 
+// Write a function to split a string and convert it into an array of words.
+// "Robin Singh" ==> ["Robin", "Singh"]
 
-function getChar($c){
+function string_to_array($s){
+    
+    return explode(' ',$s);
+  }
 
-  return chr($c);
-}
+  $s="This is a book";
+  print_r(string_to_array($s));
 
-echo getChar(48);
-
-// chr()輸入數值轉出ASCII值
-
+  // explode() 把字串轉成陣列
 
 
 
