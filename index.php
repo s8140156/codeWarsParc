@@ -1,30 +1,43 @@
 <?php
 
-// #48 Array.diff
+// #49 Super Duper Easy
 
-// Your goal in this kata is to implement a difference function, which subtracts one list from another and returns the result.
-// It should remove all values from list a, which are present in list b keeping their order.
-// arrayDiff([1,2],[1]) == [2]
-// If a value is present in b, all of its occurrences must be removed from the other:
-// arrayDiff([1,2,2,2,3],[2]) == [1,3]
+// Make a function that returns the value multiplied by 50 and increased by 6. If the value entered is a string it should return "Error".
 
-function arrayDiff($a, $b) {
-    // your code here
-    $newArr=array_diff($a,$b);
-    return array_values($newArr);
 
-  }
+function problem($x){
+    if(is_numeric($x)){
+        return $x*50+6;
+    }else{
+        return 'Error';
+    }
+}
 
-print_r(arrayDiff([1,2,3],[2]));
-// echo arrayDiff([1,2,3],[2]);
+// is_numeric()直接檢查是否是整數或浮點數
 
-// array_diff() 比較兩個陣列並移除相同的元素 返回第一個陣列中有但第二個陣列中沒有的元素
-// 但是array_diff()會保留陣列原來的索引 不會重新編排
+// 很簡潔的三元運算式
+// function problem($x){
+//     return is_string($x) ? 'Error' : $x * 50 + 6;
+//   }
 
-// array_values() 重新索引 (重新編排一個陣列的索引，從 0 開始。)
 
-// 另外 這次有嘗試使用implode()=>陣列轉換為字串 但題意是return陣列 函數使用錯誤
+// function problem($x){
+//     //your code here
+//     $type=gettype($x);
+//     if($type=='integer' || $type=='double'){
+//         return $x*50+6;
+//     }else{
+//         return 'Error';
+//     }
+//   }
 
+// 我資料判別寫float 但實際echo出來資料類型叫double, 改成double後測試無問題
+// 自己在測試時要有實驗測試精神 先確認過後再上
+
+$x=1.2;
+echo gettype($x); //資料類型顯示double
+echo "<br>";
+echo problem(1.2);
 
 
 
