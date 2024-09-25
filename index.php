@@ -1,47 +1,58 @@
 <?php
 
-// #54 Complementary DNA
+// #55 Tribonacci Sequence(類似費波那契數)
 
-// In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". Your function receives one side of the DNA (string, except for Haskell); you need to return the other complementary side. DNA strand is never empty or there is no DNA at all (again, except for Haskell).
-//ex. "ATTGC" --> "TAACG"
+//  if we are to start our Tribonacci sequence with [1, 1, 1] as a starting input (AKA signature), we have this sequence:
+//  [1, 1 ,1, 3, 5, 9, 17, 31, ...]
+//  But what if we started with [0, 0, 1] as a signature? As starting with [0, 1] instead of [1, 1] basically shifts the common Fibonacci sequence by once place, you may be tempted to think that we would get the same sequence shifted by 2 places, but that is not the case and we would get:
+// [0, 0, 1, 1, 2, 4, 7, 13, 24, ...]
 
-function DNA_strand($dna) {
-    // return strtr($dna,['A'=>'T','T'=>'A','C'=>'G','G'=>'C']);
-    return strtr($dna, 'ACGT', 'TGCA'); //也可以這樣寫
+// Signature will always contain 3 numbers; n will always be a non-negative number; if n == 0, then return an empty array (except in C return NULL) and be ready for anything else which is not clearly specified ;)
+
+
+function tribonacci($signature, $n) {
+    if($n<=3){
+        return array_slice($signature,0,$n);
+        // array_slice(): 0=>從索引0開始取, 取$n個
+    }
+
+    $result=$signature;  // 用簽名初始化結果陣列
+
+    while(count($result)<$n){
+        $nextValue=array_sum(array_slice($result,-3));
+        // array_sum() *-3=>提取當前序列中的最後三個數來生成下一個數
+        $result[]=$nextValue;
+    }
+    return $result;
 }
 
-// strtr()是可以“一次性對應並替換多組字符”; 每個字符只會被替換一次，替換過程中不會互相影響
+// 使用 while 是根據結果陣列的長度來控制迴圈的終止。當迭代條件根據外部因素或動態變量來決定時，或者條件比較複雜，無法簡單預測迭代次數的情況下
+// 使用 for 則是直接根據迴圈的次數來進行控制;清楚知道需要迭代多少次，或者可以在每次迭代時依照固定的步驟來改變狀態的情況下
 
-// 使用判斷方式
-// function DNA_strand($dna) {
-//     foreach(str_split($dna) as $val){
-//       if($val == "A") $str .= "T";
-//       if($val == "T") $str .= "A";
-//       if($val == "C") $str .= "G";
-//       if($val == "G") $str .= "C";
+// 使用for()解法 看起來最後開始減
+// function tribonacci(array $signature, int $n): array {
+//     for ($i = $n - 3; $i > 0; $i--) {
+//       $signature[] = array_sum(array_slice($signature, -3));
 //     }
-//     return $str;
+//     return array_slice($signature, 0, $n);
 //   }
 
+// 另外一個酷解法
+// function tribonacci($signature, $n) {
+//     $res = [];
+//     for ($i = 0; $i < $n; $i++) {
+//       if ($i < 3)
+//         $res[$i] = $signature[$i];
+//       else
+//         $res[$i] = $res[$i-1] + $res[$i-2] + $res[$i-3];
+//     }
+//     return $res;
+// }
 
+$signature=[0,0,1];
+$n=10;
 
-//以下會造成替換不完全狀況
-//str_replace():會先由"左至右依序"A->T, C->G然後結束。但如果字串有T or G的就會遺漏沒有換到
-//即使將替換陣列補齊 也會造成上述變一輪後 結果又全部顛倒再一次變換
-
-// function DNA_strand($dna) {
-//     // Your code here
-//     $cha=['A','C'];
-//     $rep=['T','G'];
-
-//     return str_replace($cha,$rep,$dna);
-
-//   }
-
-  $dna='TAACG';
-  echo DNA_strand($dna);
-
-
+print_r(tribonacci($signature, $n));
 
 
 
