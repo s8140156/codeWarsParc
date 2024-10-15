@@ -1,30 +1,33 @@
 <?php
 
-// #60 No zeros for heros
-// 1450 -> 145
-// 960000 -> 96
-// 1050 -> 105
-// -1050 -> -105
+// #60 Growth of a Population
+
+// In a small town the population is p0 = 1000 at the beginning of a year. The population regularly increases by 2 percent per year and moreover 50 new inhabitants per year come to live in the town. How many years does the town need to see its population greater than or equal to p = 1200 inhabitants?
+// p0, percent, aug (inhabitants coming or leaving each year), p (population to equal or surpass)
+// the function nb_year should return n number of entire years needed to get a population greater or equal to p.
+// aug is an integer, percent a positive or null floating number, p0 and p are positive integers (> 0)
 
 
-function noBoringZeros(int $n): int {
+function nbYear($p0, $percent, $aug, $p) {
+    // your code
+    $year=0;
+    while($p0<$p){
+        $p0=floor($p0+$p0*($percent/100)+$aug);
+        $year++;
+    }
+    return $year;
+}
 
-    return intval(rtrim($n,0));
-  }
-
-  // rtrim()這是在處理移除字串右侧的字元 這支函數是處理"字串"
-  // ltrim()是處理字串左側的; trim()是處理字串兩側
-  // 依據題意 回傳資料型態要是int 所以必須確保資料型態正確intval()
-
-// 使用計算方式 資料型態就是int
-//   function noBoringZeros(int $n): int{
-//     while ($n % 10 === 0 && $n !== 0) {
-//         $n = (int)($n / 10);
-//     }
-//     return $n;
+// 用for寫法
+// function nbYear($p0, $percent, $aug, $p) {
+//     for ($year = 0; $p0 < $p; $year++){
+//             $p0 += intval($p0 * ($percent/100) + $aug);
+//         }
+//         return $year;
 // }
 
-  echo noBoringZeros(-23050000);
+echo nbYear(1500000, 2.5, 10000, 2000000);
+
 
 
 
