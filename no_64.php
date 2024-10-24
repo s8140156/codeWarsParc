@@ -17,6 +17,11 @@ function solution($str, $ending) {
     // substr():第二個參數- 是從字串抹端返回
   }
 
+  // 使用str_ends_with()
+  // function solution(string $str, string $ending): bool {
+  //   return str_ends_with($str, $ending);
+  // }
+
   echo solution("abcd", "cd")?'true':'false';
 
 
