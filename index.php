@@ -1,35 +1,44 @@
 <?php
 
-// #62 Count the Digit
+// #63 Remove anchor from URL
 
-// Take an integer n (n >= 0) and a digit d (0 <= d <= 9) as an integer.
-// Square all numbers k (0 <= k <= n) between 0 and n.
-// Count the numbers of digits d used in the writing of all the k**2.
-// Implement the function taking n and d as parameters and returning this count.
-// 注意 自己有弄錯題意 以為是列出有$d的數字陣列出來 =>不是 是計算有多少個$d的次數
+// Complete the function/method so that it returns the url with anything after the anchor (#) removed.
+// ex. "www.codewars.com#about" --> "www.codewars.com"
 
-function nbDig($n, $d) {
-    // your code
-    $count=0;
-    $dStr=(string)$d;
-    for($i=0;$i<=$n;$i++){
-        $square=$i*$i;
-        $squareStr=(string)$square;
-        $count+=substr_count($squareStr,$dStr);
-        // substr_count()：用來計算字串中指定字元出現的次數，這裡用來計算平方後的數字包含 d 的次數
+function replaceAll($string) {
+    $newStrings=explode('.',$string);
+    foreach($newStrings as &$newString){
+        //注意須加& 使用&引用，直接修改原本的值
+        $newString=explode('#',$newString)[0];
+        // 可以再使用explode by #分割 如題意是#後面字元都不要 所以保留分割後第0個位置
     }
-    return $count;
+    return implode('.',$newStrings);
+    // 這邊是將"$newStrings"以.合併
 }
 
-//另一種寫法
-// function nbDig($n, $d) {
-//     $string = "";
-//     for ($x=0; $x <= $n; $string .= ($x++)**2);
-//  $string .= ($x++)**2; 的作用是在每次迴圈執行時，將 $x 的平方結果拼接到 $string 字串後面
-//     return substr_count($string,$d);
+// 看看人家理解的更精確
+// function replaceAll($string) {
+//     return explode("#", $string)[0];
 //   }
 
-echo nbDig(5750, 0);
+// 另一種寫法
+// function replaceAll($string) {
+// 	$pos = strpos($string, "#");
+// 		if ($pos === false) {
+// 			return $string;
+       // 如果沒找到#直接回傳字串
+// 		} else {
+// 			return strstr($string, "#", true);
+       // 如果有找到# 第三個參數是true, 則返回#前面字元 (第三個參數預設是false)
+       // strstr()：搜尋字串是否在另一字串存在 一般預設如果存在 是返回包括此字串及後面剩餘部份
+// 		}
+// }
+
+$input = "http://www.uol.com.br#teste";
+echo replaceAll($input);
+echo "<br>";
+
+echo strstr('Hello World','World');
 
 
 
