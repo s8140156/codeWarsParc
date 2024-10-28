@@ -1,36 +1,69 @@
 <?php
 
-// #67 Exclamation marks series #11: Replace all vowel to exclamation mark in the sentence
+// #68 Count of positives / sum of negatives
 
-// Replace all vowel to exclamation mark in the sentence. aeiouAEIOU is vowel.
+// Given an array of integers.
 
-function replace(string $s): string {
-    // Write your code here
-    $vowels=['a','e','i','o','u','A','E','I','O','U'];
-    foreach($vowels as $vow){
-        $s=str_replace($vow,'!',$s);
-        // 常犯錯誤：我本來建立一個新變數$newS造成在foreach迴圈中，每次使用 str_replace 都會生成一個新的字串$newS，
-        // 但你並沒有在每次替換後"更新$s"，因此最終只會"反映出最後一次替換"的結果
+// Return an array, where the first element is the count of positives numbers and the second element is sum of negative numbers. 0 is neither positive nor negative.
+// If the input is an empty array or is null, return an empty array.
+
+
+
+function countPositivesSumNegatives($input)
+{
+
+    if (empty($input)) {
+        return [];
+        // 當是空的返回“空陣列” 寫法是這樣 不是return $input
     }
-    return $s;
-  }
+    $positive = array_filter($input, function ($num) {
+        return $num > 0;
+    });
+    // print_r($positive);
+    // echo "<br>";
+    $pos = count($positive);
 
-  // 別種寫法
-//   function replace($s) {
-//     $VOWELS = "aeiouAEIOU";
-  
-//     for($i = 0; $i < strlen($s); ++$i) {
-//       if(strpos($VOWELS, $s[$i]) !== false) {
-         // 為何要使用!==false判斷（其實就是有找到這個母音的位置）
-         // 因為使用==true判斷 因為strpos()返回是整數0或是false
-         // 會造成假設找到的就是第一個字元(索引0)則返回0造成誤判false
-//         $s[$i] = "!";
-//       }
+
+    $negtive = array_filter($input, function ($num) {
+        return $num < 0;
+    });
+    $neg = array_sum($negtive);
+
+    $result = [$pos, $neg];
+    return $result;
+}
+
+// 簡潔寫法
+// function countPositivesSumNegatives($input) {
+//     if (empty($input)) {
+//       return [];
 //     }
-//     return $s;
+    
+//     $positives = array_filter($input, function($i) { return $i > 0; });
+//     $negatives = array_filter($input, function($i) { return $i < 0; });
+    
+//     return [count($positives), array_sum($negatives)];
 //   }
 
-  echo replace("!Hi! Hi!");
+// foreach寫法
+// function countPositivesSumNegatives($input) {
+//     if (empty($input)) {
+//       return [];
+//     }
+    
+//     $pos = $neg = 0;
+//     foreach ($input as $value) {
+//       if ($value > 0) {
+//         $pos += 1;
+           // 這是計算個數喔 也可以$pos++;
+//       } else {
+//         $neg += $value;
+           // 這是加總負數 所以是將$value值加總
+//       }
+//     }
+    
+//     return [$pos, $neg];
+// }
 
-
-?>
+$input = [0, 2, 3, 0, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14];
+print_r(countPositivesSumNegatives($input));
