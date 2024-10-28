@@ -1,17 +1,26 @@
 <?php
 
-// #69 MakeUpperCase
-// Write a function which converts the input string to uppercase.
+// #70 Reversing Words in a String
 
-function makeUpperCase(string $input): string {
-    return strtoupper($input);
+// You need to write a function that reverses the words in a given string. Words are always separated by a single space.
+// As the input may have trailing spaces, you will also need to ignore unneccesary whitespace.
+
+// ex. "Hello World" --> "World Hello"
+
+function reverse($string) {
+    // Your code here
+    $words=explode(" ",$string);
+    $result=array_reverse($words);
+    return implode(" ",$result);
   }
 
-  // strtoupper():字串轉大寫
-  // strtolower():字串轉小寫
+  // 超簡潔一行寫法
+//   function reverse($string) {
+//     return implode(" ", array_reverse(explode(" ", $string)));
+//   }
 
-  $input="you have to be kidding.";
-  echo makeUpperCase($input);
+  $string="Hello World";
+  echo reverse($string);
 
 
 
