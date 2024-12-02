@@ -1,56 +1,40 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-// #75 Check the exam
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-// The first input array is the key to the correct answers to an exam, like ["a", "a", "b", "d"]. The second one contains a student's submitted answers.
-// The two arrays are not empty and are the same length. Return the score for this array of answers, giving +4 for each correct answer, -1 for each incorrect answer, and +0 for each blank answer, represented as an empty string (in C the space character is used).
-// If the score < 0, return 0.
+<body>
 
-function checkExam(array $array1, array $array2): int{
+<!-- #76 <javascript> Is it even -->
+ <!-- In this Kata we are passing a number (n) into a function.
+Your code will determine if the number passed is even (or not).
+The function needs to return either a true or false.
+Numbers may be positive or negative, integers or floats.
+Floats with decimal part non equal to zero are considered UNeven for this kata. -->
 
-    $score = 0;
-    $length = max(count($array1), count($array2));
-    // $array1=array_pad($array1,$length,'');
-    // $array2=array_pad($array2,$length,'');
+    <script>
+        // function testEven(n) {
+        //     //Your awesome code here!
+        //     if (!Number.isInteger(n)) {
+        //         return false;
+        //     }
+        //     return n % 2 === 0;
+        // }
 
-    for ($i = 0; $i < $length; $i++) {
-        if ($array2[$i] === '') {
-            $score += 0;
-        } else if ($array1[$i] == $array2[$i]) {
-            $score += 4;
-        } else {
-            $score -= 1;
+        // 網友寫法
+        function testEven(n) {
+            return n % 2 === 0 ? true : false;
         }
-    }
-    if($score>0){
-        return $score;
-    }else{
-        return 0; // your code here
-    }
-}
 
-// 計算迴圈數量別的網友寫法 直接count(array1)
+        // console.log(testEven(4));
+        // console.log(testEven(3));
+        // console.log(testEven(-2));
+        console.log(testEven(-2.5));
+    </script>
+</body>
 
-// function checkExam(array $array1, array $array2): int{
-//     $total_point = 0;
-//     for($i = 0;$i<count($array1);$i++){
-//       if($array2[$i] === ""){
-//         $total_point += 0;
-//       }elseif($array1[$i] === $array2[$i]){
-//           $total_point += 4;
-//       }elseif($array1[$i] !== $array2[$i]){
-//           $total_point -= 1;
-//       }
-//     }
-//     if($total_point < 0){
-//       $total_point = 0;
-//     }
-//     return $total_point;
-//   }
-
-$array1=["a", "a", "b", "c"];
-$array2=["a", "a", "b", "c"];
-
-echo checkExam($array1,$array2);
-
-?>
+</html>
