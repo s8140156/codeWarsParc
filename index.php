@@ -1,65 +1,24 @@
 <?php
 
-// #78 Primes in numbers
-// Given a positive number n > 1 find the prime factor decomposition of n. The result will be a string with the following form :
-//  "(p1**n1)(p2**n2)...(pk**nk)"
-// Example: n = 86240 should return "(2**5)(5)(7**2)(11)"
+// #79 How many lightsabers do you own?
+// The only person who owns lightsabers is Zach, by the way. He owns 18, which is an awesome number of lightsabers. Anyone else owns 0.
+// Note: your function should have a default parameter
 
-
-function primeFactors($n)
-{
-    // your code
-    $factors = [];
-    $divisor = 2; // 除數從2開始
-
-    while ($n > 1) {
-        $count = 0;
-        while ($n % $divisor == 0) {
-            $count++;
-            $n /= $divisor;
-            // echo "Divisor: $divisor, Count: $count, Remaining n: $n\n";
-        }
-        // 如果當前質數出現過，加入結果陣列
-        if ($count > 0) {
-            $factors[$divisor] = $count; // key:$divisor(除數) value:$count(除幾次)
-            // 這邊是表現陣列裡的key(質數/除數)要加入陣列
-        }
-        $divisor++; //嘗試下一個除數(質數)
+// 參數沒有預設0 or '' 會導致測試codewars時 出現"ArgumentCountError"錯誤訊息 (表示測試沒有任何參數傳遞時會出現問題)
+function howManyLightsabersDoYouOwn($name='') {
+    // TODO: Make some stuff more good here
+    if($name=='Zach'){
+        return 18;
+    }else{
+        return 0;
     }
-    // 組合題意要的表現方式
-    $result = '';
-    foreach ($factors as $prime => $count) {
-        $result .= '(' . $prime;
-        if ($count > 1) {
-            $result .= '**' . $count;
-        }
-        $result .= ')';
-    }
-    return $result;
 }
 
-echo primeFactors(86240);
+// function howManyLightsabersDoYouOwn($name = 0) {
+//     return ($name === 'Zach') ? 18 : 0;
+//   }
 
-// 更簡潔寫法 請了解strval()在幹嘛
-// function primeFactors($n) {
-//     if ($n < 2) return "(".strval($n).")";
-//     $factors = "";
-//     for ($i = 2; $i <= $n; $i++) {
-//         $cnt = 0;
-//         while ($n % $i == 0) {
-//             $cnt++;
-//             $n /= $i;
-//         }
-//         if ($cnt) {
-//             $factors .= "(".strval($i);
-//             if ($cnt > 1) {
-//                 $factors .= "**".strval($cnt);
-//             }
-//             $factors .= ")";
-//         }
-//     }
-//     return $factors;
-// }
+echo howManyLightsabersDoYouOwn('Adam');
 
 
 ?>
