@@ -1,24 +1,49 @@
 <?php
 
-// #79 How many lightsabers do you own?
-// The only person who owns lightsabers is Zach, by the way. He owns 18, which is an awesome number of lightsabers. Anyone else owns 0.
-// Note: your function should have a default parameter
+// #80 Mumbling
+// Examples:
+// accum("abcd") -> "A-Bb-Ccc-Dddd"
+// accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
+// accum("cwAt") -> "C-Ww-Aaa-Tttt"
 
-// 參數沒有預設0 or '' 會導致測試codewars時 出現"ArgumentCountError"錯誤訊息 (表示測試沒有任何參數傳遞時會出現問題)
-function howManyLightsabersDoYouOwn($name='') {
-    // TODO: Make some stuff more good here
-    if($name=='Zach'){
-        return 18;
-    }else{
-        return 0;
+function accum($s) {
+    // your code
+    $result=[]; //記得是宣告在外面
+    for($i=0;$i<strlen($s);$i++){
+        $ch=$s[$i]; //取得字母
+        // print_r($ch);
+        $result[]=strtoupper($ch).str_repeat(strtolower($ch),$i);
     }
+    return implode('-',$result);
+    
+    
 }
 
-// function howManyLightsabersDoYouOwn($name = 0) {
-//     return ($name === 'Zach') ? 18 : 0;
-//   }
+// 使用foreach()方式
+// function accum($s) {
+//     $parts = [];
+    
+//     foreach (str_split($s) as $index => $part) {
+//       $parts[] = strtoupper($part) . str_repeat(strtolower($part), $index);
+//     }
+    
+//     return implode('-', $parts);
+// }
 
-echo howManyLightsabersDoYouOwn('Adam');
+// 使用for() 注意是以連接方式(簡寫)串字串
+// function accum($s) {
+//     $result = "";
+//     for($i = 0; $i < strlen($s); $i++){
+//       $letter = $s[$i];
+//       $result .= strtoupper($letter) . str_repeat(strtolower($letter), $i) . '-';
+//     }
+//     return trim($result, "-");
+// }
+
+
+echo accum('abc');
+
+
 
 
 ?>
