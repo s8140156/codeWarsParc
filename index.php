@@ -19,6 +19,19 @@ function removeEveryOther($array) {
 // 原先寫$result[]=$value; => 會將index重新編排 ex.[0 => 1, 1 => 5, 2 => 9]
 // $result[$idx]=$value; => 保留原index ex.[0 => 1, 2 => 5, 4 =>9]
 
+// 另一種思考(以除掉奇數為主)
+// function removeEveryOther($array) {
+//   $result=[];
+//   foreach($array as $idx => $value){
+//     if($idx % 2){
+//         unset($array[$idx]);
+//     }
+//   }
+//   return $result;
+// }
+// 保留索引為偶數的項目，移除索引為奇數的項目
+// unset()保留原始索引不變
+
 print_r(removeEveryOther([1,3,5,7,9,11]));
 
 
