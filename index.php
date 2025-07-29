@@ -1,44 +1,58 @@
 <?php
 
-// #83 Factorial(階乘)
+// #84 Tortoise racing
 
-// In mathematics, the factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less than or equal to n. For example: 5! = 5 * 4 * 3 * 2 * 1 = 120. By convention the value of 0! is 1.
+// Two tortoises named A and B must run a race. A starts with an average speed of 720 feet per hour. Young B knows she runs faster than A, and furthermore has not finished her cabbage.
+// When she starts, at last, she can see that A has a 70 feet lead but B's speed is 850 feet per hour. How long will it take B to catch A?
+// More generally: given two speeds v1 (A's speed, integer > 0) and v2 (B's speed, integer > 0) and a lead g (integer > 0) how long will it take B to catch A?
+// The result will be an array [hour, min, sec] which is the time needed in hours, minutes and seconds (round down to the nearest second) or a string in some languages.
+// If v1 >= v2 then return nil, nothing, null, None or {-1, -1, -1} for C++, C, Go, Nim, Pascal, COBOL, Erlang, [-1, -1, -1] for Perl,[] for Kotlin or "-1 -1 -1" for others.
+// race(720, 850, 70) => [0, 32, 18] or "0 32 18"
+// race(80, 91, 37)   => [3, 21, 49] or "3 21 49"
 
-// Write a function to calculate factorial for a given input. If input is below 0 or above 12 throw an exception of type ArgumentOutOfRangeException (C#) or IllegalArgumentException (Java) or RangeException (PHP) or throw a RangeError (JavaScript) or ValueError (Python) or return -1 (C).
-
-function factorial(int $n): int
-{
-    if ($n < 0 || $n > 12) {
-        throw new RangeException("Input must be between 0 and 12.");
+function race($v1, $v2, $g) {
+    if($v1 >= $v2){
+        return null;
     }
-    $result = 1;
-    for ($i = 2; $i <= $n; $i++) {
-        $result *= $i;
-    }
-    return $result;
+    $speedDiff=$v2-$v1;
+    $remainder=$g / $speedDiff;
+    $totalSecs=floor($remainder * 3600);
+    $hr=floor($totalSecs / 3600);
+    $min=floor(($totalSecs % 3600) / 60);
+    $sec=($totalSecs % 60);
+    $catchup=[];
+    return $catchup=[$hr, $min, $sec];
 }
 
-// 簡潔的寫法
-// function factorial(int $n): int {
-//   if ($n > 12 || $n < 0) {
-//     throw new RangeException();
-//   }
-//   return $n ? $n * factorial($n - 1) : 1;
+// 超簡潔版本1
+// function race($v1, $v2, $g) {
+//   if($v1 >= $v2) return null;
+//   $h = $g / ($v2 - $v1);
+//   return [floor($h), (floor($h * 60) % 60), floor($h * 3600) % 60];
 // }
 
-// factorial($n - 1) 就是在呼叫自己本身這個 factorial() 函式，這種寫法叫做：遞迴（Recursion）
-// 遞迴：當一個函式「在自己的內部呼叫自己」來處理較小的子問題時，就叫做遞迴
-// 當$n=0, return 1 => 因為0!=1，這是遞迴的終止條件
-// 當$n>0, return $n * factorial($n-1) 不斷呼叫factorial($n-1)直到遞減到0為止 
-// **遞迴有記憶體堆疊上限，所以不能用在太大的數字（這裡設的 n > 12 就是一種限制）
-// **遞迴必須有終止條件（這裡是 $n == 0 時回傳 1），否則會變成無限遞迴導致錯誤
+// 超簡潔版本2
+// function race($v1, $v2, $g) {
+//   if($v1 >= $v2)
+//     return null;
+  
+//   $h = $g/($v2-$v1);
+//   return explode (':',gmdate("H:i:s", floor($h*3600)));
+// }
+
+// 超簡潔版本3
+// function race($v1, $v2, $g) {
+//     return $v2 >= $v1 ? explode(' ', date("H i s", mktime(0, 0, $g*3600/($v2-$v1)))) : null;
+// }
+
+$v1=80;
+$v2=91;
+$g=37;
+
+print_r(race($v1, $v2, $g));
 
 
 
-try {
-    echo factorial(12);
-} catch (RangeException $e) {
-    echo "錯誤訊息：" . $e->getMessage();
-}
+
 
 ?>
