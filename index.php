@@ -1,40 +1,31 @@
 <?php
 
-// # 88 Find the Remainder
+// # 89 Testing 1-2-3
 
-// Write a function that accepts two integers and returns the remainder of dividing the larger value by the smaller value.
-// Division by zero should return an empty value
-// example
-// n = 17
-// m = 5
-// result = 2 (remainder of `17 / 5`)
+// Write a function which takes a list of strings and returns each line prepended by the correct number.
+// The numbering starts at 1. The format is n: string. Notice the colon and space in between.
+// ex:["a", "b", "c"] --> ["1: a", "2: b", "3: c"]
 
-// n = 13
-// m = 72
-// result = 7 (remainder of `72 / 13`)
-
-// n = 0
-// m = -1
-// result = 0 (remainder of `0 / -1`) **合法除法 此會回傳0
-
-// n = 0
-// m = 1
-// result - division by zero (refer to the specifications on how to handle this in your language)
-
-function remainder($a, $b) {
-    $large=max($a,$b);
-    $small=min($a,$b);
-    return $small == 0 ? null : $large % $small; // 根據題意1 / 0、0 / 0 則應回傳 null
+// array_map()
+function number(array $lines): array{
+    return array_map(function($val,$i){
+        return ($i+1) . ': ' . $val;
+    },$lines,array_keys($lines));
 }
+// array_map() 語法：array_map(callback, array1, array2, ...) 
+// 當傳入兩個陣列時，callback 裡的 第一個參數是 array1 的值，第二個是 array2 的值
+// 從以上程式碼來看 array1:input $lines的val array2:input 使用array_keys($lines)取$lines陣列的index($i)
 
-// 簡潔寫法
-// function remainder($a, $b) {
-//     return min( $a, $b ) == 0 ? null : max( $a, $b ) % min( $a, $b );
+
+// foreach方式
+// function number(array $lines): array{
+//     $arr=[];
+//     foreach($lines as $idx=>$val){
+//         $arr[]=($idx+1) . ': ' . $val;
+//     }
+//     return $arr;
 // }
 
-echo remainder(0,-1);
-
-
-
+print_r(number(["A","B","C","D"]));
 
 ?>
