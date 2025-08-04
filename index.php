@@ -1,37 +1,39 @@
 <?php
 
-// # 87 Sort Numbers
+// # 88 Find the Remainder
 
-// Finish the solution so that it sorts the passed in array of numbers. If the function passes in an empty array or null/nil value then it should return an empty array.
+// Write a function that accepts two integers and returns the remainder of dividing the larger value by the smaller value.
+// Division by zero should return an empty value
+// example
+// n = 17
+// m = 5
+// result = 2 (remainder of `17 / 5`)
 
+// n = 13
+// m = 72
+// result = 7 (remainder of `72 / 13`)
 
-function solution($nums) {
-    if(!empty($nums)){
-        sort($nums); // sort() 就地排序（in-place sort）函數，會直接修改 $nums 這個陣列的內容; 但他回傳是bool (true/false) 不是排序後的陣列本身
-        // sort(array &$array, int $flags = SORT_REGULAR): true
-        return $nums; // 所以要回傳排序過後的$nums
-    }else{
-        return [];
-    }
+// n = 0
+// m = -1
+// result = 0 (remainder of `0 / -1`) **合法除法 此會回傳0
+
+// n = 0
+// m = 1
+// result - division by zero (refer to the specifications on how to handle this in your language)
+
+function remainder($a, $b) {
+    $large=max($a,$b);
+    $small=min($a,$b);
+    return $small == 0 ? null : $large % $small; // 根據題意1 / 0、0 / 0 則應回傳 null
 }
 
-
 // 簡潔寫法
-// function solution($nums) : array {
-//   $nums = $nums ?? [];
-//   sort($nums);
-//   return $nums;
+// function remainder($a, $b) {
+//     return min( $a, $b ) == 0 ? null : max( $a, $b ) % min( $a, $b );
 // }
 
-// 如果 $nums 沒有被設定（例如是 null 或根本不存在），就給它預設為空陣列 [], 否則保留原本的值
-// 使用了 PHP 的「null 合併運算子（null coalescing operator）??」
-// 等價
-// if (!isset($nums)) {
-//     $nums = [];
-// }
+echo remainder(0,-1);
 
-
-print_r(solution([]));
 
 
 
