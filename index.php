@@ -1,31 +1,45 @@
 <?php
 
-// # 89 Testing 1-2-3
+// # 90 Beginner Series #3 Sum of Numbers
 
-// Write a function which takes a list of strings and returns each line prepended by the correct number.
-// The numbering starts at 1. The format is n: string. Notice the colon and space in between.
-// ex:["a", "b", "c"] --> ["1: a", "2: b", "3: c"]
+// Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
+// Ex.
+// (1, 0) --> 1 (1 + 0 = 1)
+// (1, 2) --> 3 (1 + 2 = 3)
+// (0, 1) --> 1 (0 + 1 = 1)
+// (1, 1) --> 1 (1 since both are same)
+// (-1, 0) --> -1 (-1 + 0 = -1)
+// (-1, 2) --> 2 (-1 + 0 + 1 + 2 = 2)
 
-// array_map()
-function number(array $lines): array{
-    return array_map(function($val,$i){
-        return ($i+1) . ': ' . $val;
-    },$lines,array_keys($lines));
+
+function getSum(int $a, int $b): int{
+    if($a==$b){
+        return $a;
+    }
+    $min=min($a,$b);
+    $max=max($a,$b);
+    return array_sum(range($min,$max));
 }
-// array_map() 語法：array_map(callback, array1, array2, ...) 
-// 當傳入兩個陣列時，callback 裡的 第一個參數是 array1 的值，第二個是 array2 的值
-// 從以上程式碼來看 array1:input $lines的val array2:input 使用array_keys($lines)取$lines陣列的index($i)
 
-
-// foreach方式
-// function number(array $lines): array{
-//     $arr=[];
-//     foreach($lines as $idx=>$val){
-//         $arr[]=($idx+1) . ': ' . $val;
-//     }
-//     return $arr;
+// 簡潔版本
+// function getSum(int $a, int $b): int{
+//   return $a === $b ? $a : array_sum(range($a, $b));
 // }
 
-print_r(number(["A","B","C","D"]));
+// 遞迴版本
+// function getSum(int $a, int $b): int{
+//   $max = max($a,$b);
+//   $min = min($a,$b);
+//   $sum = 0;
+    
+//   for ($i = $min;$i<=$max;$i++){
+//     $sum += $i;
+    
+//   }return $sum;
+// }
+
+echo getSum(6,-1);
+
+
 
 ?>

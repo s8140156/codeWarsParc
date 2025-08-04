@@ -21,6 +21,7 @@ function between(int $a, int $b): array {
 // range()
 // 語法：range(start(起始), end(結束), step = 1(間距 預設1))
 // 也可以用在字元喔 print_r(range('a', 'e'));
+// range() 可以不用管兩個數誰大誰小 他可以升冪也可以降冪(自動處理)
 
 
 
