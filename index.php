@@ -1,44 +1,42 @@
 <?php
 
-// # 90 Beginner Series #3 Sum of Numbers
+// # 91 Fake Binary
+// Given a string of digits, you should replace any digit below 5 with '0' and any digit 5 and above with '1'. Return the resulting string.
 
-// Given two integers a and b, which can be positive or negative, find the sum of all the integers between and including them and return it. If the two numbers are equal return a or b.
-// Ex.
-// (1, 0) --> 1 (1 + 0 = 1)
-// (1, 2) --> 3 (1 + 2 = 3)
-// (0, 1) --> 1 (0 + 1 = 1)
-// (1, 1) --> 1 (1 since both are same)
-// (-1, 0) --> -1 (-1 + 0 = -1)
-// (-1, 2) --> 2 (-1 + 0 + 1 + 2 = 2)
-
-
-function getSum(int $a, int $b): int{
-    if($a==$b){
-        return $a;
+function fake_bin(string $s): string {
+    $result=''; // 宣告空字串
+    foreach(str_split($s) as $ch){ // str_split() 把輸入的字串變成陣列（for 遍歷用）
+        $result .= $ch < 5 ? '0' : '1'; // 最後結果用 .= 把每個處理過的字元“拼接回一個字串”(別忘記你一開始是宣告$result=''空字串)
     }
-    $min=min($a,$b);
-    $max=max($a,$b);
-    return array_sum(range($min,$max));
+    return $result; // 回傳的是字串！！
 }
 
-// 簡潔版本
-// function getSum(int $a, int $b): int{
-//   return $a === $b ? $a : array_sum(range($a, $b));
+// 使用陣列的方式
+// function fake_bin(string $s): string {
+//     $result = []; //  宣告空陣列
+//     foreach (str_split($str) as $ch) {
+//         $result[] = $ch < 5 ? '0' : '1'; // 陣列 push
+//     }
+//     return implode('', $result); // implode() 拼回字串
 // }
 
-// 遞迴版本
-// function getSum(int $a, int $b): int{
-//   $max = max($a,$b);
-//   $min = min($a,$b);
-//   $sum = 0;
-    
-//   for ($i = $min;$i<=$max;$i++){
-//     $sum += $i;
-    
-//   }return $sum;
+
+// strtr()方式
+// function fake_bin(string $s): string {
+//   return strtr($s, '0123456789', '0000011111');
+// }
+// 語法：strtr(string,from,to) 或 strtr(string,array)
+
+// 還是可以用str_replace()喔
+// function fake_bin(string $s): string {
+//   $s = str_replace(range(0,4), 0, $s);
+//   $s = str_replace(range(5,9), 1, $s);
+  
+//   return $s;
 // }
 
-echo getSum(6,-1);
+
+echo fake_bin('2345678');
 
 
 
